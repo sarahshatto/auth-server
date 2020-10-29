@@ -3,7 +3,6 @@
 // // dependencies
 const express = require('express');
 const router = require('./router.js');
-// const users = require('./users-model.js')
 // const base64 = require('base64');
 const app = express();
 
