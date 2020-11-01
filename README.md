@@ -7,7 +7,7 @@ Create .env at the root level, with the following variables:
     MONGODB_URI
     PORT
 
-Run:
+To Run:
     npm install
 
 # Starting the server

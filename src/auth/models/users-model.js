@@ -43,4 +43,26 @@ users.statics.validateBasic = async function (username, password) {
   
 }
 
+users.statics.validateToken = async function (token){
+ 
+ try {
+   // use jwt.verify to undo what jwt.sign did, returns an object containing the username 
+  let userObject = jwt.verify(token, secret); 
+
+// create a variable that is the true username
+  let username = userObject.username;   
+  
+// Lookup in the database and find the username
+  let userRecord = await this.findOne({ username: username }); 
+  // return it
+  return userRecord; 
+
+ } catch (error) {
+   console.log('Invalid Token part 2')
+   return undefined;
+ }; 
+
+}
+
 module.exports = mongoose.model('users', users);
+ 

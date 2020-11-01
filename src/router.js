@@ -4,6 +4,7 @@
 const express = require('express');
 const users = require('./auth/models/users-model.js');
 const basic = require('./auth/middleware/basic.js');
+const bearer = require('./auth/middleware/bearer.js'); 
 
 // Storing the router in a variable
 const router = express.Router();
@@ -52,6 +53,17 @@ router.get('/users', basic, async (req, res, next) => {
 
   res.status(201)
   .json(allUsers);
+
+  next();
+});
+
+
+// SECRET / BEARER ROUTE
+
+router.get('/secret', bearer, (req, res, next) => {
+  // return a status of 201 with the user object. 
+  res.status(201)
+  .json(req.user); 
 
   next();
 });
