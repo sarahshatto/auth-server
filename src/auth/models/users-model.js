@@ -13,7 +13,7 @@ const users = mongoose.Schema({
   username: {type: String, required: true}, 
   password: {type: String, required: true}
 });
-
+ 
 // encrypt the password.. this is called everytime before .save is called. 
 users.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 5);
@@ -75,7 +75,7 @@ users.statics.getOauthUser = async function (userID){
     return userRecord;
   }
   else {
-    let newUser = new users({ 
+    let newUser = new UserModel({ 
       username: userID,
       password: Math.random()
     });
@@ -83,5 +83,6 @@ users.statics.getOauthUser = async function (userID){
   };
 };
 
-module.exports = mongoose.model('users', users);
+const UserModel = mongoose.model('users', users);
+module.exports = UserModel;
  

@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
     let localUser = await users.getOauthUser(remoteUser.login);
 
     req.user = localUser;
-    req.token = user.generateToken();
+    req.token = localUser.generateToken();
 
     next();
 
