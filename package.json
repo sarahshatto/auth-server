@@ -4,7 +4,7 @@
   "description": "An authenticated server. ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/sarahshatto/auth-server#readme",
   "dependencies": {
+    "@code-fellows/supergoose": "^1.0.11",
     "base-64": "^1.0.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jest": "^26.6.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.11",
     "superagent": "^6.1.0"

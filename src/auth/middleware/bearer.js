@@ -22,15 +22,18 @@ module.exports = async (req, res , next) => {
     let userRecord = await users.validateToken(token);
     //this returns a promise
 
+    if(userRecord == undefined) {
+      next('Invalid token');
+    } else {
+      // Finding the user by the token!
+      // compare the token 
+      // if it's good carry on my wayward son
 
-    // Finding the user by the token!
-    // compare the token 
-    // if it's good carry on my wayward son
+      req.user = userRecord;
 
-    req.user = userRecord;
-
-    next();
-    //res.send('signin complete');
+      next();
+      //res.send('signin complete');
+    }
 
   } catch (err) {
     next("Invalid Token");

@@ -17,8 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(router);
 
 // Add the todo routes for v1 and v2
-app.use('/app/v1', todov1);
-app.use('/app/v2', todov2);
+app.use('/api/v1', todov1);
+app.use('/api/v2', todov2);
 
 // Error handler -last express route
 app.use((error, req, res, next) => {

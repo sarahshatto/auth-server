@@ -2,9 +2,9 @@
 
 const express = require('express');
 const router = express.Router();
-const todo = require('./models/todo-model');
-const bearerAuth = require('./middleware/bearer');
-const permissions = require('./middleware/permissions');
+const todo = require('./auth/models/todo-model.js');
+const bearerAuth = require('./auth/middleware/bearer.js');
+const permissions = require('./auth/middleware/permissions.js');
 
 router.post('/todo', bearerAuth, permissions('create'), addSingleItem);
 router.get('/todo', bearerAuth, permissions('read'),getAllItems);

@@ -22,7 +22,7 @@ router.post('/signup', async(req, res, next) => {
   let newUser = await record.save();
     // console.log(req.body);
     res.status(201)
-    .send(newUser.generateToken());
+    .json({token : newUser.generateToken()});
 
     next();
 

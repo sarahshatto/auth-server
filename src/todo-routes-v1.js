@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const todo = require('./models/todo-model');
+const todo = require('./auth/models/todo-model.js');
 
 router.post('/todo', addSingleItem);
 router.get('/todo', getAllItems);
