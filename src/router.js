@@ -5,6 +5,7 @@ const express = require('express');
 const users = require('./auth/models/users-model.js');
 const basic = require('./auth/middleware/basic.js');
 const bearer = require('./auth/middleware/bearer.js'); 
+const oauth = require('./auth/middleware/oauth.js');
 
 // Storing the router in a variable
 const router = express.Router();
@@ -66,6 +67,11 @@ router.get('/secret', bearer, (req, res, next) => {
   .json(req.user); 
 
   next();
+});
+
+// OAUTH ROUTE
+router.get('/oauth', oauth, (req, res) => {
+  res.status(200).send('ok');
 });
 
 module.exports = router; 

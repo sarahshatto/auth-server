@@ -4,10 +4,10 @@
 require('dotenv').config()
 
 let mongoose = require('mongoose');
-let server = require('./server.js');
+let server = require('./src/server.js');
 
 // connect to database
-mongoose.connect(process.envMONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
   useNewUrlParser: true
 });

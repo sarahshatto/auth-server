@@ -64,5 +64,24 @@ users.statics.validateToken = async function (token){
 
 }
 
+users.statics.getOauthUser = async function (userID){
+  // need to see if this username already exists within the database: 
+  // if it does: return it from the database
+  // if it does not: create a new username, make up a password, and then return the new user 
+
+  let userRecord = await this.findOne({ username: userID });
+
+  if(userRecord){
+    return userRecord;
+  }
+  else {
+    let newUser = new users({ 
+      username: userID,
+      password: Math.random()
+    });
+    return await newUser.save();
+  };
+};
+
 module.exports = mongoose.model('users', users);
  
