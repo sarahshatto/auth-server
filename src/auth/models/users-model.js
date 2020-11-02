@@ -11,9 +11,22 @@ const secret = 'sauce';
 // build a schema: rules for data to be entered in
 const users = mongoose.Schema({
   username: {type: String, required: true}, 
-  password: {type: String, required: true}
+  password: {type: String, required: true},
+  role: {
+    type: String,
+    required: true,
+    default: 'guest',
+    enum: ['guest', 'user', 'admin'],
+  },
 });
- 
+
+// The permissions each role has by role
+const permissionsByRole = {
+  guest: ['read'],
+  user: ['read', 'create'],
+  admin: ['read', 'create', 'update', 'delete'],
+};
+
 // encrypt the password.. this is called everytime before .save is called. 
 users.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 5);
@@ -81,6 +94,12 @@ users.statics.getOauthUser = async function (userID){
     });
     return await newUser.save();
   };
+};
+
+// Check user capability
+users.methods.can = function (capability) {
+  // check our role capabilities array by this role to see if we can do this
+  return permissionsByRole[this.role].includes(capability);
 };
 
 const UserModel = mongoose.model('users', users);

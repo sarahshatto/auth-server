@@ -14,7 +14,8 @@ const router = express.Router();
 router.post('/signup', async(req, res, next) => {
   let userData = {
     username: req.body.username, 
-    password: req.body.password
+    password: req.body.password,
+    role: req.body.role || 'guest',
   }
 // creates a new instance of the mongo schema...
   let record = new users(userData);
